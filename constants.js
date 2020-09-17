@@ -1,0 +1,10 @@
+export const TOKEN = 'xoxp-236793178754-428602079061-1367578509730-8b7d2f4f1e30bc43bcbb35843f2ba8f3'
+export const CHANNELS = {
+  SHARING: 'CCB1ENNP7'
+}
+
+export const MAX_SCORE_SHARING_WEEK = 10;
+export const SCORE_SHARING = 2;
+export const MAX_SCORE_INTERACTIVE_WEEK = 10;
+export const SCORE_INTERACTIVE = 1;
+
