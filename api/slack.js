@@ -89,10 +89,12 @@ const getConversionHistory = ({ channel, latest, oldest }) => axios({
     url: 'https://vexere.slack.com/api/conversations.history',
     method: 'GET',
     params: {
-        token: TOKEN,
         channel,
         latest,
         oldest,
+    },
+    headers: {
+        Authorization: `Bearer ${TOKEN}`
     }
 })
 
@@ -148,8 +150,8 @@ const getConversionHistory = ({ channel, latest, oldest }) => axios({
 const getAllUser = () => axios({
     url: 'https://vexere.slack.com/api/users.list',
     method: 'GET',
-    params: {
-        token: TOKEN,
+    headers: {
+        Authorization: `Bearer ${TOKEN}`
     }
 })
 
