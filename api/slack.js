@@ -321,6 +321,7 @@ export const calculateCurrentPoint = async (oldest, latest = new Date()) => {
         pointWithUser,
         dataGroupByUserByDate,
         dataGroupByUserByWeek,
+        members,
     }
 
 }
