@@ -1,10 +1,15 @@
 import { useState, useCallback } from 'react'
+import axios from 'axios'
 import Head from 'next/head'
 import { DateRangePicker } from 'react-dates';
 import { useSetRecoilState } from 'recoil'
 import { calculateCurrentPoint } from '../api/slack'
 import TableRanking from '../components/table'
 import { data } from '../recoil'
+
+const getSlackPoint = (oldest, latest) => axios({
+  url: `/api/slackSharingPoint?oldest=${oldest}&latest=${latest}`
+})
 
 export default function Home() {
   const [focusedInput, setFocusedInput] = useState()
@@ -15,9 +20,8 @@ export default function Home() {
   const onSubmit = useCallback(
     async () => {
       setLoading(true)
-      const response = await calculateCurrentPoint(dates.startDate.startOf('d').unix() * 1000, dates.endDate.endOf('d').unix() * 1000)
-      console.log(response)
-      setData(response)
+      const { data } = await getSlackPoint(dates.startDate.startOf('d').unix(), dates.endDate.endOf('d').unix())
+      setData(data)
       setDataLoaded(true)
       setLoading(false)
       setTimeout(() => {

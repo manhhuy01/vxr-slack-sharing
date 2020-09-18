@@ -1,12 +1,12 @@
-import _ from 'lodash'
-import moment from 'moment'
-import axios from 'axios'
-import {
+const _ = require('lodash')
+const moment = require('moment')
+const axios = require('axios')
+const {
     CHANNELS, MAX_SCORE_SHARING_WEEK,
     SCORE_SHARING, MAX_SCORE_INTERACTIVE_WEEK,
     SCORE_INTERACTIVE,
     TOKEN
-} from '../constants';
+} = require('../constants')
 
 /*
 {
@@ -305,12 +305,10 @@ const getUserInfo = (points, members) => points.map(x => ({
 }))
 
 
-export const calculateCurrentPoint = async (oldest, latest = new Date()) => {
-    let latestDate = new Date(latest);
-    let oldestDate = new Date(oldest);
+const calculateCurrentPoint = async (oldest, latest) => {
     const [{ data: { members } }, { data: { messages } }] = await Promise.all([
         getAllUser(),
-        getConversionHistory({ channel: CHANNELS.SHARING, latest: latestDate.getTime() / 1000, oldest: oldestDate.getTime() / 1000 })
+        getConversionHistory({ channel: CHANNELS.SHARING, latest, oldest })
     ]);
     const postData = messages.map(createDataByPost);
     // console.log(postData.length)
@@ -326,4 +324,10 @@ export const calculateCurrentPoint = async (oldest, latest = new Date()) => {
         members,
     }
 
+}
+
+
+
+module.exports = {
+  calculateCurrentPoint,
 }
